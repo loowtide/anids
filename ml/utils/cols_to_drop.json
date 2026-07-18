@@ -1,0 +1,15 @@
+[
+  "active_min",
+  "active_std",
+  "bwd_seg_size_avg",
+  "fwd_seg_size_avg",
+  "idle_max",
+  "idle_mean",
+  "idle_min",
+  "idle_std",
+  "pkt_size_avg",
+  "subflow_bwd_byts",
+  "subflow_bwd_pkts",
+  "subflow_fwd_byts",
+  "subflow_fwd_pkts"
+]
