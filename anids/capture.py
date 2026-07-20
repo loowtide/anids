@@ -7,6 +7,7 @@ def start_capture(
 ):
     os.makedirs(outdir, exist_ok=True)
     cmd = [
+        "sudo",
         "tcpdump",
         "-i",
         interface,

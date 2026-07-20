@@ -27,12 +27,14 @@ uv add git+https://github.com/hieulw/cicflowmeter
 uv sync
 ```
 
+> **Note:** `tcpdump` is invoked with `sudo` internally by the capture module, so you don't need to run anids live with sudo explicitly.
+
 ## Quick start
 
 **Analyze a pcap file:**
 
 ```bash
-anids file -f suspicious_capture.pcap
+anids file -f <file_path>.pcap
 ```
 
 **Capture live traffic** (requires root for `tcpdump`):
@@ -47,22 +49,22 @@ Press `Ctrl+C` to stop capturing. Results are logged to `anids/capture_data/resu
 
 ### `anids live`
 
-| Flag | What it does | Default |
-|------|--------------|---------|
-| `-i`, `--interface` | Network interface to sniff | *required* |
-| `-m`, `--model` | XGBoost model file | `ml/models/xgb_model.pkl` |
-| `--rotate-secs` | Seconds between pcap file rotation | `60` |
-| `--outdir` | Where to store pcap files | `anids/capture_data/pcap` |
-| `--results-csv` | Where to log results | `anids/capture_data/results.csv` |
+| Flag                | What it does                       | Default                          |
+| ------------------- | ---------------------------------- | -------------------------------- |
+| `-i`, `--interface` | Network interface to sniff         | _required_                       |
+| `-m`, `--model`     | XGBoost model file                 | `ml/models/xgb_model.pkl`        |
+| `--rotate-secs`     | Seconds between pcap file rotation | `60`                             |
+| `--outdir`          | Where to store pcap files          | `anids/capture_data/pcap`        |
+| `--results-csv`     | Where to log results               | `anids/capture_data/results.csv` |
 
 ### `anids file`
 
-| Flag | What it does | Default |
-|------|--------------|---------|
-| `-f`, `--file` | Pcap file to analyze | *required* |
-| `-m`, `--model` | XGBoost model file | `ml/models/xgb_model.pkl` |
-| `-o`, `--output` | Output CSV path | `anids/capture_data/csv/<name>.csv` |
-| `--results-csv` | Where to log results | `anids/capture_data/results.csv` |
+| Flag             | What it does         | Default                             |
+| ---------------- | -------------------- | ----------------------------------- |
+| `-f`, `--file`   | Pcap file to analyze | _required_                          |
+| `-m`, `--model`  | XGBoost model file   | `ml/models/xgb_model.pkl`           |
+| `-o`, `--output` | Output CSV path      | `anids/capture_data/csv/<name>.csv` |
+| `--results-csv`  | Where to log results | `anids/capture_data/results.csv`    |
 
 ## Training your own model
 
@@ -84,6 +86,7 @@ anids/
 │   ├── classifier.py   # Model loading & prediction
 │   ├── pipeline.py     # Classification loop
 │   ├── display.py      # Terminal UI
+│   ├── csv_tail.py     # Tail results CSV
 │   └── results_writer.py
 ├── ml/
 │   ├── data/           # Raw and processed datasets
@@ -91,5 +94,7 @@ anids/
 │   ├── notebooks/      # Jupyter notebooks
 │   ├── scripts/        # Data processing scripts
 │   └── utils/          # Training pipeline
+│       ├── train.py    # Model training script
+│       └── config.py   # Training configuration
 └── pyproject.toml
 ```
