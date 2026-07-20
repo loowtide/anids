@@ -16,8 +16,8 @@ BACKUP_DIR = os.path.join(
 def find_duplicate_column(df):
     hash_col = {}
     for col in df.columns:
-        hash = hashlib.sha256(df[col].to_numpy().tobytes()).hexdigest()
-        hash_col.setdefault(hash, []).append(col)
+        col_hash = hashlib.sha256(df[col].to_numpy().tobytes()).hexdigest()
+        hash_col.setdefault(col_hash, []).append(col)
 
     duplicate = [cols for cols in hash_col.values() if len(cols) > 1]
     return duplicate

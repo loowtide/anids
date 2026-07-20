@@ -8,6 +8,9 @@ wheels/
 
 # Virtual environments
 .venv
+
+
+# project files
 ml/data/raw/
 ml/data/clean/
-
+anids/__pycache__/
